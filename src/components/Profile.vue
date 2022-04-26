@@ -1,17 +1,18 @@
 <script>
 export default {
-  name: 'Survey'
+  name: 'Profile'
 }
 </script>
 
 <template>
   <div>
-    <h1>Survey</h1>
+    <h1>Profile</h1>
     <router-link to="/">Back to Dashboard</router-link>
   </div>
   <div>
-      <router-link to="/feedback">Submit</router-link>
+      <router-link to="/editprofile">Edit Profile</router-link>
     </div>
+
 </template>
 
 <style scoped>
