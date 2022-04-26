@@ -1,11 +1,16 @@
-module.exports = {
-    runtimeCompiler: true,
-    css: {
-      loaderOptions: {
-        sass: {
-          data: `@import "scss/_variables.scss";`
-        }
-      }
-    }
-  }
-  
+const { defineConfig } = require('@vue/cli-service')
+module.exports = defineConfig({
+  transpileDependencies: true
+})
+
+
+// module.exports = {
+//   runtimeCompiler: true,
+//   css: {
+//     loaderOptions: {
+//       sass: {
+//         data: `@import "scss/_variables.scss";`
+//       }
+//     }
+//   }
+// }

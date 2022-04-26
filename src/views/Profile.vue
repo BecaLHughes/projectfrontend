@@ -8,10 +8,8 @@ export default {
   <div>
     <h1>Profile</h1>
     <router-link to="/">Back to Dashboard</router-link>
+    <router-link to="/editprofile">Edit Profile</router-link>
   </div>
-  <div>
-      <router-link to="/editprofile">Edit Profile</router-link>
-    </div>
 
 </template>
 
