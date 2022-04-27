@@ -2,39 +2,71 @@
 
 <script>
 export default {
-  name: 'SignIn'
+  name: 'SignIn',
+  data () {
+     return {
+        form: {
+         email: null,
+         password: null
+      }
+     }
+  },
+  
+   methods: {
+      onSubmit() {
+         console.log(this.form);
+         this.$router.push({ path: '/' });
+      }
+   }
 }
+
 </script>
 
 <template>
-    <div class="login-page">
-      <transition name="fade">
-         <div v-if="!registerActive" class="wallpaper-login"></div>
-      </transition>
-      <div class="container">
-         <div class="row">
-            <div class="col-lg-4 col-lg-offset-4 col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
-               <div v-if="!registerActive" class="card login" v-bind:class="{ error: emptyFields }">
-                  <h1>Sign In</h1>
-                  <form>
-                     <div class="form-group">
-                        <input v-model="emailLogin" type="email" class="form-control" placeholder="Email" required>
-                     </div>
-                     <div class="form-group">
-                        <input v-model="passwordLogin" type="password" class="form-control" placeholder="Password" required>
-                     </div><div class="form-group">
-                        <input type="submit" class="btn btn-primary" @click="doLogin">
-                     </div>
-                     <p>
-                        Don't have an account? <router-link to="/signup">Sign up here</router-link>
-                     </p>
-                     <p><router-link to="/forgotpassword">Forgot password</router-link></p>
-                  </form>
-               </div>
-            </div>
-         </div>
+<div class="login-page">
+   <div class="container">
+      <div class="row">
+         <v-col cols="12" sm="6" offset="4">
+            <form novalidate @submit.prevent="onSubmit">
+               <h1>Sign in</h1>
+               <p>
+                  Don't have an account? 
+                  <router-link to="/signup">Sign up here</router-link>
+               </p>
+
+               <v-text-field v-model="form.email" label="Email Address" outlined></v-text-field>
+               <v-text-field v-model="form.password" label="Password" outlined></v-text-field>
+
+               <v-row>
+                  <v-col>
+                     <router-link to="/forgotpassword">
+                        <v-btn text color="primary" outlined rounded large>
+                           Forgot password
+                        </v-btn>
+                     </router-link>
+                  </v-col>
+
+                  <v-col>
+                     <v-btn
+                        rounded
+                        color="primary"
+                        large
+                        block
+                        align="right"
+                        type="submit"
+                     >
+                     Sign In
+                     </v-btn>
+                  </v-col>
+                  
+
+                  
+               </v-row>
+            </form>
+         </v-col>
       </div>
    </div>
+</div>
 </template>
 
 <style scoped>
