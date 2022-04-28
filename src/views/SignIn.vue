@@ -1,27 +1,3 @@
-@import 
-
-<script>
-export default {
-  name: 'SignIn',
-  data () {
-     return {
-        form: {
-         email: null,
-         password: null
-      }
-     }
-  },
-  
-   methods: {
-      onSubmit() {
-         console.log(this.form);
-         this.$router.push({ path: '/' });
-      }
-   }
-}
-
-</script>
-
 <template>
 <div class="login-page">
    <div class="container">
@@ -47,20 +23,10 @@ export default {
                   </v-col>
 
                   <v-col>
-                     <v-btn
-                        rounded
-                        color="primary"
-                        large
-                        block
-                        align="right"
-                        type="submit"
-                     >
+                     <v-btn rounded color="primary" large block align="right" type="submit">
                      Sign In
                      </v-btn>
                   </v-col>
-                  
-
-                  
                </v-row>
             </form>
          </v-col>
@@ -68,6 +34,28 @@ export default {
    </div>
 </div>
 </template>
+
+<script>
+export default {
+  name: 'SignIn',
+  data () {
+     return {
+        form: {
+         email: null,
+         password: null
+      }
+     }
+  },
+  
+   methods: {
+      onSubmit() {
+         console.log(this.form);
+         this.$router.push({ path: '/' });
+      }
+   }
+}
+
+</script>
 
 <style scoped>
 
