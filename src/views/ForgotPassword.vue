@@ -43,8 +43,8 @@ export default {
         form: {
          email: null,
       },
-      alertsuccess: null,
-      alertunsuccessful: null,
+      alertsuccess: true,
+      alertunsuccessful: true,
 
      }
   },
@@ -52,6 +52,7 @@ export default {
    methods: {
       onSubmit() {
          console.log(this.form);
+         
          this.$router.push({ path: '/signin' });
       }
    }

@@ -15,7 +15,7 @@
 
                <v-row>
                   <v-col>
-                     <router-link to="/forgotpassword">
+                     <router-link to="/forgot-password">
                         <v-btn text color="primary" outlined rounded large>
                            Forgot password
                         </v-btn>

@@ -31,11 +31,10 @@
               </v-list-item-icon>
               <v-list-item-title><router-link to="/profile">Logout</router-link></v-list-item-title>
             </v-list-item>
-            
+
           </v-list-item-group>
         </v-list>
       </v-navigation-drawer>
-
       <line-chart :data="[40, 39, 10, 40, 39, 100, 40]" :labels="[
           'January',
           'February',
@@ -46,10 +45,10 @@
           'July'
         ]" />
         <div>
-          <v-row>
-            <v-col>
+          <v-row class="mt-2">
+            <v-col class="d-flex justify-end mb-6">
                 <router-link to="/survey">
-                  <v-btn class="d-flex mb-6" align-items="right" color="primary" outlined rounded large>
+                  <v-btn color="primary" rounded large class="mr-6">
                     Take Survey
                   </v-btn>
                 </router-link>

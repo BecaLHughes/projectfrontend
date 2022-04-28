@@ -7,7 +7,6 @@ import Survey from '@/views/Survey.vue'
 import Feedback from '@/views/Feedback.vue'
 import ForgotPassword from '@/views/ForgotPassword.vue'
 import Profile from '@/views/Profile.vue'
-import EditProfile from '@/views/EditProfile.vue'
 
 Vue.use(VueRouter)
 
@@ -38,7 +37,7 @@ const routes = [
     component: Feedback
   },
   {
-    path: '/forgotpassword',
+    path: '/forgot-password',
     name: 'forgotpassword',
     component: ForgotPassword
   },
@@ -46,11 +45,6 @@ const routes = [
     path: '/profile',
     name: 'profile',
     component: Profile
-  },
-  {
-    path: '/editprofile',
-    name: 'editprofile',
-    component: EditProfile
   },
   { path: '/', redirect: '/signin' }
 ]
