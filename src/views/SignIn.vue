@@ -1,3 +1,5 @@
+
+
 <template>
 <div class="login-page">
    <div class="container">
@@ -9,9 +11,8 @@
                   Don't have an account? 
                   <router-link to="/signup">Sign up here</router-link>
                </p>
-
-               <v-text-field v-model="form.email" label="Email Address" outlined></v-text-field>
-               <v-text-field v-model="form.password" label="Password" outlined></v-text-field>
+               <v-text-field :error-messages="errorMessage('Email', 'email', $v)" v-model="form.email" label="Email Address" outlined></v-text-field>
+               <v-text-field :error-messages="errorMessage('Password', 'password', $v)"  v-model="form.password" label="Password" outlined></v-text-field>
 
                <v-row>
                   <v-col>
@@ -36,6 +37,9 @@
 </template>
 
 <script>
+import { required, minLength, maxLength, email } from 'vuelidate/lib/validators';
+import { errorMessage } from '@/helpers';
+
 export default {
   name: 'SignIn',
   data () {
@@ -46,12 +50,30 @@ export default {
       }
      }
   },
-  
+  validations: {
+    form: {
+       email: {
+          required,
+          email
+       },
+       password: {
+          required,
+          minLength: minLength(8),
+          maxLength: maxLength(20)
+       }
+    } 
+  },
+
    methods: {
       onSubmit() {
          console.log(this.form);
+         this.$v.$touch()
+         if(this.$v.$invalid) return
          this.$router.push({ path: '/' });
-      }
+
+         
+      },
+      errorMessage
    }
 }
 

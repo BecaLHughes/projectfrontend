@@ -45,7 +45,7 @@
                <v-text-field v-model="user.password" label="Password" outlined :disabled="!editMode"></v-text-field>
 
                   <v-col>
-                    <v-btn rounded color="primary" large block align="right" @click="editMode = !editMode">
+                    <v-btn rounded color="primary" large block align="right" @click="onEdit">
                      {{ editMode ? 'Save Changes' : 'Edit Profile' }}
                      </v-btn>
                      <v-btn class="mt-6" rounded color="#fb2323" outlined large block align="right" @click="dialog = true">
@@ -111,14 +111,15 @@ export default {
    methods: {
       onSubmit() {
          console.log(this.form);
-         this.$router.push({ path: '/signin' });
+        
       },
       onEdit() {
-
+        this.editMode = !this.editMode;
       },
       onDelete () {
         console.log('delete account');
-        this.dialog = false
+        this.dialog = false;
+        //  this.$router.push({ path: '/signin' });
       }
    }
 }
