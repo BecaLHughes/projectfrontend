@@ -85,8 +85,8 @@ export default {
         labels: this.labels,
         datasets: [
           {
-            label: 'Data One',
-            backgroundColor: '#f87979',
+            label: 'Score',
+            backgroundColor: '#1976d2',
             data: this.data
           }
         ]

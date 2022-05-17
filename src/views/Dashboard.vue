@@ -1,17 +1,9 @@
 
 <template>
   <div>
-    <h1>Dashboard</h1>
+    <h1 class="text-center font-weight-light" color="primary" >My Dashboard</h1>
     <v-card>
-      <line-chart :data="[40, 39, 10, 40, 39, 100, 40]" :labels="[
-          'January',
-          'February',
-          'March',
-          'April',
-          'May',
-          'June',
-          'July'
-        ]" />
+      <line-chart :data="graphData" :labels="graphLabels"/>
         <div>
           <v-row class="mt-2">
             <v-col class="d-flex justify-end mb-6">
@@ -30,12 +22,27 @@
 
 <script>
 import LineChart from '@/components/LineChart';
+import { mapState, mapGetters } from "vuex";
+
 export default {
   name: 'Dashboard',
   components: {
     LineChart
+  },
+  mounted() {
+    this.$store.dispatch('getScoreHistory');
+  },
+  computed: {
+    ...mapState({
+      history: ({dashboard}) => dashboard.history 
+    }),
+    ...mapGetters([
+      'graphLabels',
+      'graphData'
+    ])
   }
 }
+
 
 
 </script>

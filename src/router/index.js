@@ -5,6 +5,7 @@ import SignIn from '@/views/SignIn.vue'
 import SignUp from '@/views/SignUp.vue'
 import Survey from '@/views/Survey.vue'
 import Feedback from '@/views/Feedback.vue'
+import History from '@/views/History.vue'
 import ForgotPassword from '@/views/ForgotPassword.vue'
 import Profile from '@/views/Profile.vue'
 import Store from '@/store'
@@ -49,6 +50,12 @@ const routes = [
     path: '/profile',
     name: 'profile',
     component: Profile,
+    meta: {requiresAuth: true} 
+  },
+  {
+    path: '/history',
+    name: 'history',
+    component: History,
     meta: {requiresAuth: true} 
   },
   { path: '/', redirect: '/signin' }

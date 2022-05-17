@@ -7,27 +7,39 @@
           <v-col cols="2" class="sidebar" v-if="authorized">
             <v-list nav dense color="transparent">
               <v-list-item-group>
-                <v-list-item>
-                  <v-list-item-icon>
-                    <v-icon>mdi-home</v-icon>
-                  </v-list-item-icon>
-                  <v-list-item-title><router-link to="/">Dashboard</router-link></v-list-item-title>
-                </v-list-item>
+                <router-link to="/">
+                  <v-list-item>
+                    <v-list-item-icon>
+                      <v-icon>mdi-home</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-title>Dashboard</v-list-item-title>
+                  </v-list-item>
+                </router-link>
 
-                <v-list-item>
-                  <v-list-item-icon>
-                    <v-icon>mdi-account</v-icon>
-                  </v-list-item-icon>
-                  <v-list-item-title><router-link to="/profile">Profile</router-link></v-list-item-title>
-                </v-list-item>
+                <router-link to="/history">
+                  <v-list-item>
+                    <v-list-item-icon>
+                      <v-icon>mdi-clock</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-title>History</v-list-item-title>
+                  </v-list-item>
+                </router-link>
 
-                <v-list-item @click="onLogout">
+                <router-link to="/profile" class="mb-12">
+                  <v-list-item class="mb-12">
+                    <v-list-item-icon>
+                      <v-icon>mdi-account</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-title>Profile</v-list-item-title>
+                  </v-list-item>
+                </router-link>
+                <hr/>
+                <v-list-item @click="onLogout" class="mt-2">
                   <v-list-item-icon>
                     <v-icon>mdi-logout</v-icon>
                   </v-list-item-icon>
                   <v-list-item-title>Logout</v-list-item-title>
                 </v-list-item>
-
               </v-list-item-group>
             </v-list>
           </v-col>
@@ -55,7 +67,7 @@ export default {
   },
   computed: {
     ...mapState({
-      authorized: ({ storage }) => storage.token
+        authorized: ({ storage }) => storage.token
     })
 
   }

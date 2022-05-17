@@ -39,11 +39,6 @@ const mutations = {
     state = Object.assign(state, { [prop]: value });
     localStorage.setItem('storage', JSON.stringify(state));
   },
-  // storageUpdate(state) {
-
-  //   state = Object.assign(state, initialState());
-  //   localStorage.setItem('storage', JSON.stringify({}));
-  // },
   storageReset(state) {
     state = Object.assign(state, initialState());
     

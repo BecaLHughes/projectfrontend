@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Profile</h1>
+    <h1 class="text-center font-weight-light" color="primary">My Profile</h1>
     <v-card>
       <div class="container">
       <div class="row">
