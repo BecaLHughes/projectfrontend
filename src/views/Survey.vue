@@ -1,39 +1,7 @@
 <template>
   <div>
+    <h1>Survey</h1>
       <v-card class="mx-auto overflow-hidden" height="100%">
-      <v-app-bar color="deep-purple" dark>
-        <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
-
-        <v-toolbar-title>Self Efficacy Survey</v-toolbar-title>
-      </v-app-bar>
-
-      <v-navigation-drawer v-model="drawer" absolute temporary>
-        <v-list nav dense>
-          <v-list-item-group v-model="group" active-class="deep-purple--text text--accent-4">
-            <v-list-item>
-              <v-list-item-icon>
-                <v-icon>mdi-home</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title><router-link to="/">Dashboard</router-link></v-list-item-title>
-            </v-list-item>
-
-            <v-list-item>
-              <v-list-item-icon>
-                <v-icon>mdi-account</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title><router-link to="/profile">Profile</router-link></v-list-item-title>
-            </v-list-item>
-
-            <v-list-item>
-              <v-list-item-icon>
-                <v-icon>mdi-logout</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title><router-link to="/profile">Logout</router-link></v-list-item-title>
-            </v-list-item>
-            
-          </v-list-item-group>
-        </v-list>
-      </v-navigation-drawer>
       <form novalidate @submit.prevent="onSubmit">
         <div class="pa-md-4 mx-lg-auto">
         <h3 align="center" margin="10">
@@ -86,78 +54,26 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+import { errorMessage } from '@/helpers';
+
 export default {
   name: 'Survey',
-  data () {
-    return {
-        picked:0 ,
-        radioLabels: ['0', '10', '20', '30', '40', '50', '60', '70', '80', '90', '100'],
-        questions:[
-            {
-                question: 'Question 1: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
-                type: 'radio',
-                answer: 50
-            },
-            {
-                question: 'Question 2: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
-                type: 'radio',
-                answer: 50
-            },
-            {
-                question: 'Question 3: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
-                type: 'radio',
-                answer: 50
-            },
-            {
-                question: 'Question 4: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
-                type: 'radio',
-                answer: 50
-            },
-            {
-                question: 'Question 5: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
-                type: 'radio',
-                answer: 50
-            },
-            {
-                question: 'Question 6: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
-                type: 'radio',
-                answer: 50
-            },
-            {
-                question: 'Question 7: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
-                type: 'radio',
-                answer: 50
-            },
-            {
-                question: 'Question 8: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
-                type: 'radio',
-                answer: 50
-            },
-            {
-                question: 'Question 9: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
-                type: 'radio',
-                answer: 50
-            },
-            {
-                question: 'Question 10: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
-                type: 'radio',
-                answer: 50
-            },
-            {
-                question: 'Question 11: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
-                type: 'text',
-                answer: null
-            }
-        ],
-        drawer: false,
-        group: null,
-    }
-  },
   methods: {
       onSubmit() {
-         console.log(this.picked);
-         this.$router.push({ path: '/feedback' });
-      }
+         this.$v.$touch();
+         if(this.$v.$invalid) return;
+         
+         this.$store.dispatch('feedback');
+         
+      },
+      errorMessage
+   },
+
+    computed: {
+     ...mapState({
+        survey: ({ survey }) => survey.questions
+      })
    }
   
 }

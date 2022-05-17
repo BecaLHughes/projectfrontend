@@ -11,7 +11,7 @@
                   Don't have an account? 
                   <router-link to="/signup">Sign up here</router-link>
                </p>
-               <v-text-field :error-messages="errorMessage('Email', 'email', $v)" v-model="form.email" label="Email Address" outlined></v-text-field>
+               <v-text-field :error-messages="errorMessage('Email', 'username', $v)" v-model="form.username" label="Email Address" outlined></v-text-field>
                <v-text-field :error-messages="errorMessage('Password', 'password', $v)"  v-model="form.password" label="Password" outlined></v-text-field>
 
                <v-row>
@@ -29,7 +29,18 @@
                      </v-btn>
                   </v-col>
                </v-row>
+
+               <v-alert
+                  v-if="form.error"
+                  class="mt-3"
+                  border="top"
+                  color="red lighten-2"
+                  dark
+               >
+                  {{ form.error }}
+               </v-alert>
             </form>
+
          </v-col>
       </div>
    </div>
@@ -37,22 +48,16 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import { required, minLength, maxLength, email } from 'vuelidate/lib/validators';
 import { errorMessage } from '@/helpers';
 
 export default {
   name: 'SignIn',
-  data () {
-     return {
-        form: {
-         email: null,
-         password: null
-      }
-     }
-  },
+ 
   validations: {
     form: {
-       email: {
+       username: {
           required,
           email
        },
@@ -63,14 +68,17 @@ export default {
        }
     } 
   },
-
+  computed: {
+     ...mapState({
+        form: ({ signin }) => signin.form
+      })
+   },
    methods: {
       onSubmit() {
-         console.log(this.form);
-         this.$v.$touch()
-         if(this.$v.$invalid) return
-         this.$router.push({ path: '/' });
-
+         this.$v.$touch();
+         if(this.$v.$invalid) return;
+         
+         this.$store.dispatch('signUserIn');
          
       },
       errorMessage

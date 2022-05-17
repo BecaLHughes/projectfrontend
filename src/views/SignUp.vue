@@ -10,17 +10,30 @@
                   <router-link to="/signin">Sign in here</router-link>
                </p>
 
-               <v-text-field v-model="form.fname" label="First Name" outlined></v-text-field>
-               <v-text-field v-model="form.lname" label="Last Name" outlined></v-text-field>
-               <v-text-field v-model="form.email" label="Email Address" outlined></v-text-field>
-               <v-text-field v-model="form.password" label="Password" outlined></v-text-field>
-               <v-text-field v-model="form.confirmpassword" label="Confirm Password" outlined></v-text-field>
 
+               <v-text-field :error-messages="errorMessage('First Name', 'first_name', $v)" v-model="form.first_name" label="First Name" outlined></v-text-field>
+               <v-text-field :error-messages="errorMessage('Last Name', 'last_name', $v)" v-model="form.last_name" label="Last Name" outlined></v-text-field>
+               <v-text-field :error-messages="errorMessage('Email', 'email', $v)" v-model="form.email" label="Email Address" outlined></v-text-field>
+               <v-text-field :error-messages="errorMessage('Password', 'password', $v)" v-model="form.password" label="Password" outlined></v-text-field>
+               <v-text-field :error-messages="errorMessage('Confirm Password', 'confirmpassword', $v)" v-model="form.confirmpassword" label="Confirm Password" outlined></v-text-field>
+               <v-row>
                   <v-col>
                      <v-btn rounded color="primary" large block align="right" type="submit">
                      Sign up
                      </v-btn>
                   </v-col>
+                  </v-row>
+                  <v-alert
+                  v-if="form.error"
+                  class="mt-3"
+                  border="top"
+                  color="red lighten-2"
+                  dark
+               >
+                  {{ form.error }}
+
+               </v-alert>
+
             </form>
          </v-col>
       </div>
@@ -29,25 +42,54 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
+import { required, minLength, maxLength, email, sameAs } from 'vuelidate/lib/validators';
+import { errorMessage } from '@/helpers';
+
 export default {
+   
   name: 'SignUp',
-  data () {
-     return {
-        form: {
-         fname: null,
-         lname: null,
-         email: null,
-         password: null,
-         confirmpassword: null
-      }
-     }
+
+  validations: {
+    form: {
+       first_name: {
+          required
+       },
+       last_name: {
+          required
+       },
+       email: {
+          required,
+          email
+       },
+       password: {
+          required,
+          minLength: minLength(8),
+          maxLength: maxLength(20)
+       },
+       confirmpassword: {
+          sameAs: sameAs('password'),
+          minLength: minLength(8),
+          maxLength: maxLength(20),
+          required,
+       }
+    } 
   },
   
+  computed: {
+     ...mapState({
+        form: ({ signup }) => signup.form
+      })
+   },
    methods: {
       onSubmit() {
-         console.log(this.form);
-         this.$router.push({ path: '/' });
-      }
+         this.$v.$touch();
+         if(this.$v.$invalid) return;
+         
+         this.$store.dispatch('signup');
+         
+      },
+      errorMessage
    }
 }
 </script>

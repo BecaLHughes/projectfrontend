@@ -7,6 +7,7 @@ import Survey from '@/views/Survey.vue'
 import Feedback from '@/views/Feedback.vue'
 import ForgotPassword from '@/views/ForgotPassword.vue'
 import Profile from '@/views/Profile.vue'
+import Store from '@/store'
 
 Vue.use(VueRouter)
 
@@ -14,7 +15,8 @@ const routes = [
   {
     path: '/',
     name: 'dashboard',
-    component: Dashboard
+    component: Dashboard,
+    meta: {requiresAuth: true} 
   },
   {
     path: '/signin',
@@ -29,12 +31,14 @@ const routes = [
   {
     path: '/survey',
     name: 'survey',
-    component: Survey
+    component: Survey,
+    meta: {requiresAuth: true} 
   },
   {
     path: '/feedback',
     name: 'feedback',
-    component: Feedback
+    component: Feedback,
+    meta: {requiresAuth: true} 
   },
   {
     path: '/forgot-password',
@@ -44,7 +48,8 @@ const routes = [
   {
     path: '/profile',
     name: 'profile',
-    component: Profile
+    component: Profile,
+    meta: {requiresAuth: true} 
   },
   { path: '/', redirect: '/signin' }
 ]
@@ -54,5 +59,27 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+router.beforeEach(async (to, from, next) => {
+  const { token } = await Store.dispatch('storage/initialiseStore');
+
+  const ignore = [
+    'signin',
+    'signup',
+    'forgotpassword'
+  ];
+
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!token && ignore.indexOf(to.name) < 0) {
+      Store.dispatch('signUserOut');
+    }
+  }
+
+  if (to.name == 'signin' && token) {
+    return next({ path: '/' });
+  }
+
+  next();
+});
 
 export default router
