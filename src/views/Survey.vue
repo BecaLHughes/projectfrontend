@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Survey: <br/><small>{{ title }}</small></h1>
+    <h1 class="text-center font-weight-light" color="primary">Survey<br/><small>{{ title }}</small></h1>
       <v-card class="mx-auto overflow-hidden" height="100%">
       <form novalidate @submit.prevent="onSubmit">
         <div class="pa-md-4 mx-lg-auto">

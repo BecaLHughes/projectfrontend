@@ -42,10 +42,9 @@ const actions = {
 
 const mutations = {
   updateState(state, { prop, value }) {
-    state = {
-      ...state,
+    state = Object.assign(state, {
       [prop]: value
-    };
+    });
   },
 };
 

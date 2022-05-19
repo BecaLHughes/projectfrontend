@@ -2,7 +2,7 @@
   <div>
     <v-card>
       <div class="pa-md-10 mx-lg-auto">
-        <h1 align="center">Your Score</h1>
+        <h1 align="center mb-4">Your Score</h1>
       </div>
       <div class="text-center mb-6">
         <v-progress-circular

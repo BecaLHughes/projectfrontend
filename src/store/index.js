@@ -4,6 +4,7 @@ import signin from './modules/signin';
 import signup from './modules/signup';
 import surveys from './modules/surveys';
 import feedback from './modules/feedback';
+import profile from './modules/profile'
 import dashboard from './modules/dashboard';
 import storage from './modules/storage';
 
@@ -16,6 +17,7 @@ export default new Vuex.Store({
     surveys,
     feedback,
     dashboard,
+    profile,
     storage
   }
 });

@@ -3,6 +3,7 @@
    <div class="container">
       <div class="row">
          <v-col cols="12" sm="6" offset="4">
+            <v-card class="pt-4 pl-4 pr-4 pb-4">
             <form novalidate @submit.prevent="onSubmit">
                <h1>Sign up</h1>
                <p>
@@ -14,8 +15,8 @@
                <v-text-field :error-messages="errorMessage('First Name', 'first_name', $v)" v-model="form.first_name" label="First Name" outlined></v-text-field>
                <v-text-field :error-messages="errorMessage('Last Name', 'last_name', $v)" v-model="form.last_name" label="Last Name" outlined></v-text-field>
                <v-text-field :error-messages="errorMessage('Email', 'email', $v)" v-model="form.email" label="Email Address" outlined></v-text-field>
-               <v-text-field :error-messages="errorMessage('Password', 'password', $v)" v-model="form.password" label="Password" outlined></v-text-field>
-               <v-text-field :error-messages="errorMessage('Confirm Password', 'confirmpassword', $v)" v-model="form.confirmpassword" label="Confirm Password" outlined></v-text-field>
+               <v-text-field :error-messages="errorMessage('Password', 'password', $v)" v-model="form.password" label="Password" outlined type="password"></v-text-field>
+               <v-text-field :error-messages="errorMessage('Confirm Password', 'confirmpassword', $v)" v-model="form.confirmpassword" label="Confirm Password" outlined type="password"></v-text-field>
                <v-row>
                   <v-col>
                      <v-btn rounded color="primary" large block align="right" type="submit">
@@ -35,6 +36,7 @@
                </v-alert>
 
             </form>
+            </v-card>
          </v-col>
       </div>
    </div>

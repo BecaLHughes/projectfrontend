@@ -5,6 +5,7 @@
    <div class="container">
       <div class="row">
          <v-col cols="12" sm="6" offset="4">
+            <v-card class="pt-4 pl-4 pr-4 pb-4">
             <form novalidate @submit.prevent="onSubmit">
                <h1>Sign in</h1>
                <p>
@@ -12,7 +13,7 @@
                   <router-link to="/signup">Sign up here</router-link>
                </p>
                <v-text-field :error-messages="errorMessage('Email', 'username', $v)" v-model="form.username" label="Email Address" outlined></v-text-field>
-               <v-text-field :error-messages="errorMessage('Password', 'password', $v)"  v-model="form.password" label="Password" outlined></v-text-field>
+               <v-text-field :error-messages="errorMessage('Password', 'password', $v)"  v-model="form.password" label="Password" outlined type="password"></v-text-field>
 
                <v-row>
                   <v-col>
@@ -29,7 +30,7 @@
                      </v-btn>
                   </v-col>
                </v-row>
-
+               
                <v-alert
                   v-if="form.error"
                   class="mt-3"
@@ -40,7 +41,7 @@
                   {{ form.error }}
                </v-alert>
             </form>
-
+            </v-card>
          </v-col>
       </div>
    </div>
@@ -70,12 +71,13 @@ export default {
   },
   computed: {
      ...mapState({
-        form: ({ signin }) => signin.form
+        form: ({ signin }) => signin
       })
    },
    methods: {
       onSubmit() {
          this.$v.$touch();
+         this.form.error = null;
          if(this.$v.$invalid) return;
          
          this.$store.dispatch('signUserIn');

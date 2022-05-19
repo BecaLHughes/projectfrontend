@@ -1,7 +1,7 @@
 
 <template>
   <div>
-    <h1 class="text-center font-weight-light" color="primary" >My Dashboard</h1>
+    <h1 class="text-center font-weight-light mb-4" color="primary" >My Dashboard</h1>
     <v-card>
       <line-chart :data="graphData" :labels="graphLabels"/>
         <div>
